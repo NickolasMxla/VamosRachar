@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
         android:text="Vamos Rachar!"
-        android:textColor="#673AB7"
+        android:textColor="#009688"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +51,8 @@
         android:id="@+id/shareButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_share" />
@@ -92,11 +92,15 @@
 
     <Button
         android:id="@+id/micButton"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="236dp"
+        android:backgroundTint="#009688"
         android:text="Falar"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        app:iconTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

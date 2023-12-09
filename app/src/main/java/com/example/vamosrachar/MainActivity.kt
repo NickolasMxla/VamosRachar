@@ -15,9 +15,9 @@ import androidx.annotation.RequiresApi
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    // Faz com que cada variável seja chamada por um meio, no caso os dois são pelo EditText
-    private lateinit var valorTotal: EditText
-    private lateinit var nPessoas: EditText
+    // Cada variável é chamada de uma forma
+    private lateinit var total: EditText
+    private lateinit var pessoas: EditText
 
     private lateinit var tts: TextToSpeech
     @RequiresApi(Build.VERSION_CODES.S)
@@ -26,20 +26,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Pega o valor escrito nas EditText pelo id
-        valorTotal = findViewById(R.id.edit)
-        nPessoas = findViewById(R.id.edit_2)
+        // Pega o que for escrito pelo EditText
+        total = findViewById(R.id.edit)
+        pessoas = findViewById(R.id.edit_2)
 
-        // Adiciona TextChangedListener aos campos de texto
-        valorTotal.addTextChangedListener(textWatcher)
-        nPessoas.addTextChangedListener(textWatcher)
+        // Adiciona TextChangedListener
+        total.addTextChangedListener(textWatcher)
+        pessoas.addTextChangedListener(textWatcher)
 
-        // Variáveis necessárias para o tts
+        // Permite o uso de tts
         var speakButton = findViewById<Button>(R.id.micButton)
         var el = findViewById<TextView>(R.id.result)
 
-        tts = TextToSpeech(this){status->
-            // Caso a linguagem não seja suportada, ele falará
+        tts = TextToSpeech(this){status-> // Suporte de idioma e resposta caso não possua
             if(status == TextToSpeech.SUCCESS){
                 val result = tts.setLanguage(Locale.getDefault())
                 if (result == TextToSpeech.LANG_MISSING_DATA ||
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Função principal do tts
+        // tts fazendo sua função
         speakButton.setOnClickListener{
             if (el.text.toString().trim().isNotEmpty()){
                 tts.speak(el.text.toString().trim(), TextToSpeech.QUEUE_FLUSH, null, null)
@@ -61,24 +60,23 @@ class MainActivity : AppCompatActivity() {
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            // Não é necessário implementar este método
+            // Sem necessidade
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            // Quando o texto é alterado, chama a função calcularValor
-            calcularValor()
+            // Quando alterado, o texto chama essa função
+            calcule()
         }
 
         override fun afterTextChanged(s: Editable?) {
-            // Não é necessário implementar este método
+            // Sem necessidade
         }
     }
 
-    // Função que divide o valor pelo número de pessoas
-    private fun calcularValor() {
-        // converte os valores para double ou null
-        val vTotal = valorTotal.text.toString().toDoubleOrNull()
-        val Pessoas = nPessoas.text.toString().toDoubleOrNull()
+    // Divisão pelo número de pessoas
+    private fun calcule() {
+        val vTotal = total.text.toString().toDoubleOrNull()
+        val Pessoas = pessoas.text.toString().toDoubleOrNull()
 
         if (vTotal != null && Pessoas != null) {
             // Caso ambos não sejam null (ou seja, sejam double) calcula a razão
